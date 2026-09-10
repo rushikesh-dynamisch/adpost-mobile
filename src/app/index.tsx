@@ -1,152 +1,3 @@
-// import { useState } from 'react';
-// import { StyleSheet, Pressable, View, FlatList, useWindowDimensions } from 'react-native';
-// import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-// import { Image } from 'expo-image';
-// import { SymbolView } from 'expo-symbols';
-
-// import { ThemedText } from '@/components/themed-text';
-// import { ThemedView } from '@/components/themed-view';
-// import { BottomTabInset, Spacing } from '@/constants/theme';
-
-// const ADS_DATA = [
-//   { id: '1', title: 'SuperKicks Shoes', description: 'Find your perfect pair today!', image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=300&auto=format&fit=crop' },
-//   { id: '2', title: 'AdPost Premium', description: 'Get more reach with premium advertising.', image: 'https://images.unsplash.com/photo-1557838923-2985c318be48?q=80&w=300&auto=format&fit=crop' },
-//   { id: '3', title: 'Tech Gadgets', description: 'Latest gadgets at the best prices.', image: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=300&auto=format&fit=crop' },
-//   { id: '4', title: 'Fitness App', description: 'Track your daily goals effortlessly.', image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=300&auto=format&fit=crop' },
-//   { id: '5', title: 'Coffee Beans', description: 'Freshly roasted every single day.', image: 'https://images.unsplash.com/photo-1559525839-b184a4d698c7?q=80&w=300&auto=format&fit=crop' },
-//   { id: '6', title: 'Travel Deal', description: 'Fly to Paris for less this summer.', image: 'https://images.unsplash.com/photo-1502602898657-3e91760cbb34?q=80&w=300&auto=format&fit=crop' },
-//   { id: '7', title: 'Smart Watch', description: 'Your health and fitness on your wrist.', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=300&auto=format&fit=crop' },
-//   { id: '8', title: 'Camera Gear', description: 'Capture moments perfectly with our gear.', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?q=80&w=300&auto=format&fit=crop' },
-// ];
-
-// function AdItem({ item, cardHeight }: { item: typeof ADS_DATA[0], cardHeight: number }) {
-//   console.log('hiii');
-//   const [liked, setLiked] = useState(false);
-//   return (
-//     <ThemedView style={[styles.card, { height: cardHeight }]} type="backgroundElement">
-//       <Image
-//         source={{ uri: item.image }}
-//         style={styles.image}
-//         contentFit="cover"
-//       />
-//       <View style={styles.cardContent}>
-//         <View style={styles.header}>
-//           <View style={styles.adBadge}>
-//             <ThemedText style={styles.adBadgeText} themeColor="textSecondary">Sponsored</ThemedText>
-//           </View>
-//           <Pressable onPress={() => setLiked(!liked)} style={styles.likeButton}>
-//             <SymbolView 
-//               name={liked ? 'heart.fill' : 'heart'} 
-//               size={22} 
-//               tintColor={liked ? '#ff3b30' : '#8e8e93'} 
-//             />
-//           </Pressable>
-//         </View>
-
-//         <View style={styles.infoContainer}>
-//           <ThemedText type="defaultSemiBold" style={styles.title} numberOfLines={1}>{item.title}</ThemedText>
-//           <ThemedText type="small" themeColor="textSecondary" style={styles.description} numberOfLines={2}>
-//             {item.description}
-//           </ThemedText>
-//         </View>
-//       </View>
-//     </ThemedView>
-//   );
-// }
-
-// export default function HomeScreen() {
-//   const { height } = useWindowDimensions();
-//   const insets = useSafeAreaInsets();
-  
-//   // Calculate height to fit 4 items on screen
-//   const availableHeight = height - insets.top - insets.bottom - BottomTabInset - (Spacing.four * 2);
-//   const cardHeight = Math.max(140, (availableHeight - (Spacing.three * 3)) / 4);
-
-//   return (
-//     <ThemedView style={styles.container}>
-//       <SafeAreaView style={styles.safeArea} edges={['top', 'left', 'right']}>
-//         <FlatList 
-//           data={ADS_DATA}
-//           keyExtractor={item => item.id}
-//           renderItem={({ item }) => <AdItem item={item} cardHeight={cardHeight} />}
-//           contentContainerStyle={styles.listContent}
-//           ItemSeparatorComponent={() => <View style={{ height: Spacing.three }} />}
-//           showsVerticalScrollIndicator={false}
-//         />
-//       </SafeAreaView>
-//     </ThemedView>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-//   safeArea: {
-//     flex: 1,
-//   },
-//   listContent: {
-//     padding: Spacing.four,
-//     paddingBottom: BottomTabInset + Spacing.four,
-//   },
-//   card: {
-//     flexDirection: 'row',
-//     borderRadius: 16,
-//     overflow: 'hidden',
-//   },
-//   image: {
-//     width: '35%',
-//     height: '100%',
-//   },
-//   cardContent: {
-//     flex: 1,
-//     padding: Spacing.three,
-//     justifyContent: 'space-between',
-//   },
-//   header: {
-//     flexDirection: 'row',
-//     justifyContent: 'space-between',
-//     alignItems: 'center',
-//   },
-//   adBadge: {
-//     backgroundColor: 'rgba(128,128,128,0.2)',
-//     paddingHorizontal: 6,
-//     paddingVertical: 2,
-//     borderRadius: 6,
-//   },
-//   adBadgeText: {
-//     fontSize: 10,
-//     fontWeight: 'bold',
-//     textTransform: 'uppercase',
-//   },
-//   likeButton: {
-//     padding: 2,
-//   },
-//   infoContainer: {
-//     flex: 1,
-//     justifyContent: 'center',
-//     gap: Spacing.half,
-//   },
-//   title: {
-//     fontSize: 15,
-//   },
-//   description: {
-//     fontSize: 12,
-//   },
-//   installButton: {
-//     backgroundColor: '#007AFF',
-//     paddingVertical: 8,
-//     borderRadius: 10,
-//     alignItems: 'center',
-//   },
-//   installButtonText: {
-//     color: 'white',
-//     fontSize: 13,
-//     fontWeight: 'bold',
-//   },
-// });
-
-
 import React, { useState } from 'react';
 import {
   View,
@@ -154,140 +5,472 @@ import {
   TextInput,
   TouchableOpacity,
   StyleSheet,
-  Alert,
   ScrollView,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SymbolView } from 'expo-symbols';
 
-export default function HomeScreen() {
-  const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [description, setDescription] = useState('');
-
-  const handlePostAd = () => {
-    if (!title || !price || !description) {
-      Alert.alert('Error', 'Please fill all fields');
-      return;
+// --- Constants & Types ---
+const THEME = {
+  colors: {
+    background: '#F9F8F4', // Clean off-white paper
+    paper: '#F1EFE7', // Slightly darker for preview clipping
+    textDark: '#1A1A1A',
+    textMuted: '#666666',
+    border: '#DEDCD3',
+    borderDark: '#1A1A1A',
+    accent: '#1A1A1A',
+    accentLight: '#FFFFFF',
+    error: '#C93B3B',
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 16,
+    lg: 24,
+    xl: 32,
+  },
+  typography: {
+    headline: {
+      fontSize: 28,
+      fontWeight: '800' as const,
+      letterSpacing: -0.5,
+    },
+    title: {
+      fontSize: 18,
+      fontWeight: '700' as const,
+    },
+    body: {
+      fontSize: 16,
+      fontWeight: '400' as const,
+    },
+    caption: {
+      fontSize: 13,
+      fontWeight: '500' as const,
+    },
+    serif: {
+      fontFamily: Platform.OS === 'ios' ? 'Georgia' : 'serif',
     }
+  }
+};
 
-    const ad = {
-      title,
-      price,
-      description,
-    };
+const CATEGORIES = [
+  { id: 'jobs', label: 'Jobs', icon: 'briefcase.fill' },
+  { id: 'property', label: 'Property', icon: 'house.fill' },
+  { id: 'vehicles', label: 'Vehicles', icon: 'car.fill' },
+  { id: 'services', label: 'Services', icon: 'wrench.and.screwdriver.fill' },
+  { id: 'buy_sell', label: 'Buy & Sell', icon: 'tag.fill' },
+  { id: 'events', label: 'Events', icon: 'calendar' },
+  { id: 'travel', label: 'Travel', icon: 'airplane' },
+  { id: 'others', label: 'Others', icon: 'ellipsis' },
+] as const;
 
-    console.log('Ad:', ad);
+type CategoryId = typeof CATEGORIES[number]['id'];
 
-    Alert.alert('Success', 'Your ad has been posted!');
+// --- Main Component ---
+export default function PostAdScreen() {
+  const insets = useSafeAreaInsets();
+  
+  const [activeCategory, setActiveCategory] = useState<CategoryId>('jobs');
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [price, setPrice] = useState('');
+  const [contact, setContact] = useState('');
 
-    setTitle('');
-    setPrice('');
-    setDescription('');
-  };
-
-  let a:number= 10;
-  let b: string = '';
-  let c: boolean= true;
-
-  let arr: number[] = [];
-  arr.push(10,20,40);
-  let user : {name: string, age: number} = {
-    name: 'Adpost comment',
-    age: 30
-  };
-
-let tuple : [string,number] = ['30',40];
-let studentDefault : undefined = undefined;
-
-console.log('tupple', tuple);
-console.log(user);
-console.log(arr);
-console.log('value of a is', a);
-
+  const MAX_DESC_LENGTH = 300;
 
   return (
-    <ScrollView contentContainerStyle={styles.container}>
-      <Text style={styles.heading}>Post Your Ad</Text>
+    <KeyboardAvoidingView 
+      style={styles.container} 
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+    >
+      <View style={[styles.header, { paddingTop: Math.max(insets.top, THEME.spacing.md) }]}>
+        <View style={styles.headerTop}>
+          <TouchableOpacity style={styles.backButton}>
+            <SymbolView name="chevron.left" size={22} tintColor={THEME.colors.textDark} />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>CLASSIFIEDS</Text>
+          <View style={{ width: 22 }} />
+        </View>
+        <Text style={styles.headerSubtitle}>Post an Advertisement</Text>
+        <View style={styles.headerDivider} />
+      </View>
 
-      <Text style={styles.label}>Ad Title</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="e.g. iPhone 15 Pro"
-        value={title}
-        onChangeText={setTitle}
-      />
-
-      <Text style={styles.label}>Price</Text>
-      <TextInput
-        style={styles.input}
-        placeholder="Enter price"
-        keyboardType="numeric"
-        value={price}
-        onChangeText={setPrice}
-      />
-
-      <Text style={styles.label}>Description</Text>
-      <TextInput
-        style={[styles.input, styles.description]}
-        placeholder="Describe your product..."
-        multiline
-        value={description}
-        onChangeText={setDescription}
-      />
-
-      <TouchableOpacity
-        style={styles.button}
-        onPress={handlePostAd}
+      <ScrollView 
+        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 120 }]}
+        showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.buttonText}>Post Ad</Text>
-      </TouchableOpacity>
-    </ScrollView>
+        {/* Category Selector */}
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>CATEGORY</Text>
+          <ScrollView 
+            horizontal 
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.categoryScroll}
+          >
+            {CATEGORIES.map((cat) => {
+              const isActive = activeCategory === cat.id;
+              return (
+                <Pressable
+                  key={cat.id}
+                  style={[styles.categoryPill, isActive && styles.categoryPillActive]}
+                  onPress={() => setActiveCategory(cat.id)}
+                >
+                  <SymbolView 
+                    name={cat.icon as any} 
+                    size={16} 
+                    tintColor={isActive ? THEME.colors.accentLight : THEME.colors.textDark} 
+                  />
+                  <Text style={[styles.categoryLabel, isActive && styles.categoryLabelActive]}>
+                    {cat.label}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </ScrollView>
+        </View>
+
+        {/* Form Fields */}
+        <View style={styles.section}>
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>HEADLINE *</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="e.g. Experienced React Developer"
+              placeholderTextColor={THEME.colors.textMuted}
+              value={title}
+              onChangeText={setTitle}
+              maxLength={50}
+            />
+          </View>
+
+          <View style={styles.inputGroup}>
+            <View style={styles.labelRow}>
+              <Text style={styles.inputLabel}>DESCRIPTION *</Text>
+              <Text style={styles.charCount}>{description.length}/{MAX_DESC_LENGTH}</Text>
+            </View>
+            <TextInput
+              style={[styles.input, styles.textArea]}
+              placeholder="Provide details about your listing..."
+              placeholderTextColor={THEME.colors.textMuted}
+              multiline
+              textAlignVertical="top"
+              value={description}
+              onChangeText={setDescription}
+              maxLength={MAX_DESC_LENGTH}
+            />
+          </View>
+
+          <View style={styles.row}>
+            <View style={[styles.inputGroup, { flex: 1, marginRight: THEME.spacing.sm }]}>
+              <Text style={styles.inputLabel}>LOCATION</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="City, Area"
+                placeholderTextColor={THEME.colors.textMuted}
+                value={location}
+                onChangeText={setLocation}
+              />
+            </View>
+            <View style={[styles.inputGroup, { flex: 1, marginLeft: THEME.spacing.sm }]}>
+              <Text style={styles.inputLabel}>PRICE/BUDGET</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="e.g. $5,000"
+                placeholderTextColor={THEME.colors.textMuted}
+                value={price}
+                onChangeText={setPrice}
+              />
+            </View>
+          </View>
+
+          <View style={styles.inputGroup}>
+            <Text style={styles.inputLabel}>CONTACT INFO</Text>
+            <TextInput
+              style={styles.input}
+              placeholder="Phone or Email"
+              placeholderTextColor={THEME.colors.textMuted}
+              value={contact}
+              onChangeText={setContact}
+            />
+          </View>
+        </View>
+
+        {/* Image Upload Placeholder */}
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>PHOTO (OPTIONAL)</Text>
+          <TouchableOpacity style={styles.uploadArea}>
+            <SymbolView name="camera" size={28} tintColor={THEME.colors.textMuted} />
+            <Text style={styles.uploadText}>Tap to add a photo</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* Live Preview */}
+        <View style={styles.section}>
+          <Text style={styles.sectionLabel}>LIVE PREVIEW</Text>
+          <View style={styles.previewCard}>
+            <Text style={[styles.previewCategory, THEME.typography.serif]}>
+              {CATEGORIES.find(c => c.id === activeCategory)?.label.toUpperCase() || 'CLASSIFIED'}
+            </Text>
+            <Text style={[styles.previewTitle, THEME.typography.serif]}>
+              {title.trim() ? title : 'Advertisement Headline'}
+            </Text>
+            <Text style={[styles.previewDesc, THEME.typography.serif]}>
+              {description.trim() ? description : 'Your advertisement description will appear here. Ensure it is clear and provides all necessary details to attract the right audience.'}
+            </Text>
+            
+            {(location || price) ? (
+              <View style={styles.previewDetails}>
+                {location ? <Text style={[styles.previewDetailText, THEME.typography.serif]}>Location: {location}</Text> : null}
+                {price ? <Text style={[styles.previewDetailText, THEME.typography.serif]}>Price: {price}</Text> : null}
+              </View>
+            ) : null}
+
+            <View style={styles.previewFooter}>
+              <Text style={[styles.previewContactLabel, THEME.typography.serif]}>CONTACT:</Text>
+              <Text style={[styles.previewContactText, THEME.typography.serif]}>
+                {contact.trim() ? contact : 'Not provided'}
+              </Text>
+            </View>
+          </View>
+        </View>
+
+        {/* Posting Info */}
+        <View style={styles.infoSection}>
+          <SymbolView name="info.circle" size={16} tintColor={THEME.colors.textMuted} />
+          <Text style={styles.infoText}>
+            Standard Ad • Free • 30 days visibility in {CATEGORIES.find(c => c.id === activeCategory)?.label}
+          </Text>
+        </View>
+
+      </ScrollView>
+
+      {/* Sticky Bottom CTA */}
+      <View style={[styles.bottomBar, { paddingBottom: Math.max(insets.bottom, THEME.spacing.md) }]}>
+        <TouchableOpacity style={styles.submitButton}>
+          <Text style={styles.submitButtonText}>Publish Advertisement</Text>
+        </TouchableOpacity>
+      </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flexGrow: 1,
-    padding: 20,
-    backgroundColor: '#fff',
+    flex: 1,
+    backgroundColor: THEME.colors.background,
   },
-
-  heading: {
-    fontSize: 28,
-    fontWeight: '700',
-    marginBottom: 30,
+  header: {
+    paddingHorizontal: THEME.spacing.md,
+    backgroundColor: THEME.colors.background,
+    zIndex: 10,
   },
-
-  label: {
-    fontSize: 16,
-    fontWeight: '600',
-    marginBottom: 8,
+  headerTop: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: THEME.spacing.xs,
   },
-
+  backButton: {
+    padding: THEME.spacing.xs,
+    marginLeft: -THEME.spacing.xs,
+  },
+  headerTitle: {
+    ...THEME.typography.headline,
+    color: THEME.colors.textDark,
+    textTransform: 'uppercase',
+  },
+  headerSubtitle: {
+    ...THEME.typography.caption,
+    color: THEME.colors.textMuted,
+    textAlign: 'center',
+    marginBottom: THEME.spacing.md,
+  },
+  headerDivider: {
+    height: 2,
+    backgroundColor: THEME.colors.borderDark,
+    width: '100%',
+  },
+  scrollContent: {
+    padding: THEME.spacing.md,
+    paddingTop: THEME.spacing.lg,
+  },
+  section: {
+    marginBottom: THEME.spacing.xl,
+  },
+  sectionLabel: {
+    ...THEME.typography.caption,
+    color: THEME.colors.textDark,
+    marginBottom: THEME.spacing.sm,
+    letterSpacing: 1,
+  },
+  categoryScroll: {
+    paddingVertical: THEME.spacing.xs,
+    gap: THEME.spacing.sm,
+  },
+  categoryPill: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: THEME.spacing.md,
+    paddingVertical: THEME.spacing.sm,
+    borderWidth: 1,
+    borderColor: THEME.colors.borderDark,
+    borderRadius: 0, // Sharp corners for editorial look
+    backgroundColor: THEME.colors.background,
+    gap: THEME.spacing.xs,
+  },
+  categoryPillActive: {
+    backgroundColor: THEME.colors.accent,
+  },
+  categoryLabel: {
+    ...THEME.typography.caption,
+    color: THEME.colors.textDark,
+    textTransform: 'uppercase',
+  },
+  categoryLabelActive: {
+    color: THEME.colors.accentLight,
+  },
+  inputGroup: {
+    marginBottom: THEME.spacing.md,
+  },
+  labelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginBottom: THEME.spacing.xs,
+  },
+  inputLabel: {
+    ...THEME.typography.caption,
+    color: THEME.colors.textDark,
+    marginBottom: THEME.spacing.xs,
+  },
+  charCount: {
+    fontSize: 11,
+    color: THEME.colors.textMuted,
+  },
   input: {
     borderWidth: 1,
-    borderColor: '#ddd',
-    borderRadius: 10,
-    paddingHorizontal: 15,
+    borderColor: THEME.colors.border,
+    borderBottomColor: THEME.colors.borderDark, // Stronger bottom border
+    backgroundColor: THEME.colors.accentLight,
+    paddingHorizontal: THEME.spacing.md,
     paddingVertical: 12,
-    fontSize: 16,
-    marginBottom: 20,
+    ...THEME.typography.body,
+    color: THEME.colors.textDark,
   },
-
-  description: {
-    height: 120,
-    textAlignVertical: 'top',
+  textArea: {
+    minHeight: 100,
+    paddingTop: 12,
   },
-
-  button: {
-    backgroundColor: '#222',
-    paddingVertical: 15,
-    borderRadius: 10,
+  row: {
+    flexDirection: 'row',
+  },
+  uploadArea: {
+    borderWidth: 1,
+    borderColor: THEME.colors.textMuted,
+    borderStyle: 'dashed',
+    borderRadius: 4,
+    padding: THEME.spacing.xl,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(0,0,0,0.02)',
+    gap: THEME.spacing.sm,
   },
-
-  buttonText: {
-    color: '#fff',
-    fontSize: 17,
-    fontWeight: '600',
+  uploadText: {
+    ...THEME.typography.caption,
+    color: THEME.colors.textMuted,
+  },
+  previewCard: {
+    backgroundColor: THEME.colors.paper,
+    borderWidth: 1,
+    borderColor: THEME.colors.borderDark,
+    padding: THEME.spacing.lg,
+    borderStyle: 'dashed', // Gives it a cut-out feel
+  },
+  previewCategory: {
+    fontSize: 12,
+    fontWeight: '700',
+    color: THEME.colors.textMuted,
+    marginBottom: THEME.spacing.xs,
+    letterSpacing: 1,
+  },
+  previewTitle: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: THEME.colors.textDark,
+    marginBottom: THEME.spacing.sm,
+    lineHeight: 28,
+  },
+  previewDesc: {
+    fontSize: 16,
+    color: THEME.colors.textDark,
+    lineHeight: 24,
+    marginBottom: THEME.spacing.md,
+  },
+  previewDetails: {
+    borderTopWidth: 1,
+    borderBottomWidth: 1,
+    borderColor: THEME.colors.border,
+    paddingVertical: THEME.spacing.sm,
+    marginBottom: THEME.spacing.md,
+    gap: 4,
+  },
+  previewDetailText: {
+    fontSize: 14,
+    color: THEME.colors.textDark,
+  },
+  previewFooter: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: THEME.spacing.xs,
+  },
+  previewContactLabel: {
+    fontSize: 14,
+    fontWeight: 'bold',
+    color: THEME.colors.textDark,
+  },
+  previewContactText: {
+    fontSize: 15,
+    color: THEME.colors.textDark,
+  },
+  infoSection: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: THEME.spacing.xs,
+    paddingVertical: THEME.spacing.md,
+    borderTopWidth: 1,
+    borderColor: THEME.colors.border,
+  },
+  infoText: {
+    fontSize: 12,
+    color: THEME.colors.textMuted,
+  },
+  bottomBar: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: THEME.colors.background,
+    paddingHorizontal: THEME.spacing.md,
+    paddingTop: THEME.spacing.md,
+    borderTopWidth: 1,
+    borderColor: THEME.colors.border,
+  },
+  submitButton: {
+    backgroundColor: THEME.colors.accent,
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  submitButtonText: {
+    ...THEME.typography.title,
+    color: THEME.colors.accentLight,
+    textTransform: 'uppercase',
+    letterSpacing: 1,
   },
 });
